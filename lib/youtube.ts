@@ -2,15 +2,15 @@ import { Fetch, FetchData, Params } from "./fetch"
 
 const BASE_URL = "https://www.googleapis.com/youtube/v3/"
 
-type HttpEndpoint = "videos" | "search"
 type Query = string
+export type HttpEndpoint = "videos" | "search" | string
 
-export type YoutubeParams = Params & {
+export type YoutubeParams = Params<{
   key: string
   q?: Query
   chart?: "mostPopular"
   regionCode?: "US" | "IN"
-}
+}>
 
 type Item = {
   id: { videoId: string }
@@ -39,7 +39,7 @@ export type SearchResult = {
   thumbnail?: string
 }
 
-type QueryData = FetchData<SearchResult[]>
+export type QueryData = FetchData<SearchResult[]>
 
 export class YoutubeApi extends Fetch {
   constructor(query: Query, params: YoutubeParams, endpoint: HttpEndpoint) {
