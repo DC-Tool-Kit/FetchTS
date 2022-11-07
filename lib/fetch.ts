@@ -6,8 +6,9 @@ type _Params = {
   maxResults?: number
 }
 
-export type Params<T = any> = _Params & {
-  [P in keyof T]: T[P]
+export type Params<T = {}> = T & {
+  part?: "snippet"
+  maxResults?: number
 }
 
 // yes this part
