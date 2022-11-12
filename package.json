@@ -21,10 +21,12 @@
     "registry": "https://registry.yarnpkg.com"
   },
   "scripts": {
-    "build": "npx tsc",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "test": "node ./__tests__/fetch.test.js"
   },
   "devDependencies": {
+    "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^4.8.4"
   },
   "dependencies": {

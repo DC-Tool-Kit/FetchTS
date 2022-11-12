@@ -12,10 +12,10 @@ interface Result {
 }
 export declare type FetchData<T = any> = Promise<T>;
 export interface IFetch {
-    params: Params;
+    api: AxiosInstance;
     endpoint: string;
     base_url: string;
-    api: AxiosInstance;
+    params: Params;
     data(): FetchData;
 }
 export declare class Fetch implements IFetch {
