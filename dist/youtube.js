@@ -1,18 +1,8 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.youtube = exports.YoutubeApi = void 0;
-const fetch_1 = require("./fetch");
+import { __awaiter } from './_virtual/_tslib.js';
+import { Fetch } from './fetch.js';
+
 const BASE_URL = "https://www.googleapis.com/youtube/v3/";
-class YoutubeApi extends fetch_1.Fetch {
+class YoutubeApi extends Fetch {
     constructor(query, params, endpoint) {
         params.q = query;
         params.part = "snippet";
@@ -28,7 +18,6 @@ class YoutubeApi extends fetch_1.Fetch {
         });
     }
 }
-exports.YoutubeApi = YoutubeApi;
 /**
  *
  * @param query
@@ -40,4 +29,6 @@ const youtube = (query, endpoint = "search", params = { key: '<GOOGLE_API_KEY>',
     const yt = new YoutubeApi(query, params, endpoint);
     return yield yt.results();
 });
-exports.youtube = youtube;
+
+export { YoutubeApi, youtube };
+//# sourceMappingURL=youtube.js.map
