@@ -1,12 +1,12 @@
 import { Fetch, FetchData, Params } from "./fetch";
-declare type HttpEndpoint = "videos" | "search";
 declare type Query = string;
-export declare type YoutubeParams = Params & {
+export declare type HttpEndpoint = "videos" | "search" | string;
+export declare type YoutubeParams = Params<{
     key: string;
     q?: Query;
     chart?: "mostPopular";
     regionCode?: "US" | "IN";
-};
+}>;
 export declare type SearchResult = {
     title?: string;
     videoId?: string;
@@ -17,7 +17,7 @@ export declare type SearchResult = {
     publishedAt?: string;
     thumbnail?: string;
 };
-declare type QueryData = FetchData<SearchResult[]>;
+export declare type QueryData = FetchData<SearchResult[]>;
 export declare class YoutubeApi extends Fetch {
     constructor(query: Query, params: YoutubeParams, endpoint: HttpEndpoint);
     results(): QueryData;

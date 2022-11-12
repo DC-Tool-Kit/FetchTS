@@ -1,4 +1,4 @@
-import { Fetch, FetchData, Params } from "./fetch"
+import { Fetch, FetchData, Params, RequestParams } from "./fetch"
 
 const BASE_URL = "https://www.googleapis.com/youtube/v3/"
 
@@ -11,6 +11,13 @@ export type YoutubeParams = Params<{
   chart?: "mostPopular"
   regionCode?: "US" | "IN"
 }>
+
+// export interface YoutubeParams extends RequestParams {
+//   key: string
+//   q?: Query
+//   chart?: "mostPopular"
+//   regionCode?: "US" | "IN"
+// }
 
 type Item = {
   id: { videoId: string }

@@ -16,3 +16,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./fetch"), exports);
 __exportStar(require("./youtube"), exports);
+// import { Params } from './fetch'
+// import { YoutubeParams, youtube } from './youtube'
+// const params: YoutubeParams = {
+// }
+// youtube('naruto','search',)

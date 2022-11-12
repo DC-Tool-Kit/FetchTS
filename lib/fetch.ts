@@ -1,14 +1,18 @@
-import axios from "axios"
+import axios, { AxiosInstance } from "axios"
 
 // how can this be better
-type _Params = {
+// type _Params = {
+//   part?: "snippet"
+//   maxResults?: number
+// }
+
+export interface RequestParams {
   part?: "snippet"
   maxResults?: number
 }
 
-export type Params<T = {}> = T & {
-  part?: "snippet"
-  maxResults?: number
+export type Params<T = any> = RequestParams & {
+  [k in keyof T]: T[k]
 }
 
 // yes this part
@@ -18,13 +22,13 @@ interface Result {
   status: number
 }
 
-
 export type FetchData<T = any> = Promise<T>
 
 export interface IFetch {
-  params: Params
+  api: AxiosInstance
   endpoint: string
   base_url: string
+  params: Params
   data(): FetchData
 }
 
