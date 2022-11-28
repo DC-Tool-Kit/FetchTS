@@ -1,85 +1,76 @@
-import { Fetch, FetchData, Params, RequestParams } from "./fetch"
+import { Fetch, FetchData, Params, RequestParams } from "./fetch";
 
-const BASE_URL = "https://www.googleapis.com/youtube/v3/"
+const BASE_URL = "https://www.googleapis.com/youtube/v3/";
+const WATCH_URL = "https://www.youtube.com/watch?v=";
 
-type Query = string
-export type HttpEndpoint = "videos" | "search" | string
+type Query = string;
+export type HttpEndpoint = "videos" | "search" | string;
 
 export type YoutubeParams = Params<{
-  key: string
-  q?: Query
-  chart?: "mostPopular"
-  regionCode?: "US" | "IN"
-}>
-
-// export interface YoutubeParams extends RequestParams {
-//   key: string
-//   q?: Query
-//   chart?: "mostPopular"
-//   regionCode?: "US" | "IN"
-// }
+  key: string;
+  q?: Query;
+  chart?: "mostPopular";
+  regionCode?: "US" | "IN";
+}>;
 
 type Item = {
-  id: { videoId: string }
-  snippet: any
-}
+  id: { videoId: string };
+  snippet: any;
+};
 
 type Result = {
-  items: Item[]
-}
+  items: Item[];
+};
 
 type Thumbnail = {
-  url: string
-  width: number
-  height: number
-}
+  url: string;
+  width: number;
+  height: number;
+};
 
 export type SearchResult = {
-  title?: string
-  videoId?: string
-  channelId?: string
-  channelTitle?: string
-  description?: string
-  publishTime?: string
-  publishedAt?: string
-  // thumbnail?: { default: Thumbnail; high: Thumbnail; medium: Thumbnail }
-  thumbnail?: string
-}
+  title: string;
+  videoId: string;
+  channelId: string;
+  channelTitle: string;
+  description: string;
+  publishTime: string;
+  publishedAt: string;
+  thumbnails: { default: Thumbnail; high: Thumbnail; medium: Thumbnail };
+};
 
-export type QueryData = FetchData<SearchResult[]>
+export type QueryData = FetchData<SearchResult[]>;
 
 export class YoutubeApi extends Fetch {
   constructor(query: Query, params: YoutubeParams, endpoint: HttpEndpoint) {
-    params.q = query
-    params.part = "snippet"
-    super(params, BASE_URL, endpoint)
+    params.q = query;
+    params.part = "snippet";
+    super(params, BASE_URL, endpoint);
   }
 
   async results(): QueryData {
-    const { items } = (await this.data()) as unknown as Result
+    const { items } = (await this.data()) as unknown as Result;
     return items.map((item) => {
       const res: SearchResult = {
         videoId: item.id.videoId,
-        thumbnail: item.snippet.thumbnails.high.url,
         ...item.snippet,
-      }
-      return res
-    })
+      };
+      return res;
+    });
   }
 }
 
 /**
- * 
- * @param query 
- * @param endpoint 
+ *
+ * @param query what are you search for?
  * @param params must pass api key as param
  * @returns Search results
  */
 export const youtube = async (
   query: Query,
-  endpoint: HttpEndpoint = "search",
-  params: YoutubeParams = { key: '<GOOGLE_API_KEY>', maxResults: 8 }
+  // endpoint: HttpEndpoint = "search",
+  params: YoutubeParams = { key: "<GOOGLE_API_KEY>", maxResults: 8 }
 ) => {
-  const yt = new YoutubeApi(query, params, endpoint)
-  return await yt.results()
-}
+  const yt = new YoutubeApi(query, params, "search");
+  return await yt.results();
+};

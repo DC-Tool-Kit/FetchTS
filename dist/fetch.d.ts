@@ -3,14 +3,14 @@ export interface RequestParams {
     part?: "snippet";
     maxResults?: number;
 }
-export declare type Params<T = any> = RequestParams & {
+export type Params<T = any> = RequestParams & {
     [k in keyof T]: T[k];
 };
 interface Result {
     data: any;
     status: number;
 }
-export declare type FetchData<T = any> = Promise<T>;
+export type FetchData<T = any> = Promise<T>;
 export interface IFetch {
     api: AxiosInstance;
     endpoint: string;
