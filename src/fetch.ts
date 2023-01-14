@@ -35,8 +35,6 @@ export type Params<T = any> = RequestParams &
     [k in keyof T]: T[k];
   };
 
-// yes this part
-
 interface Result {
   data: any;
   status: number;

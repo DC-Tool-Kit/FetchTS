@@ -1,6 +1,6 @@
 export const BASE_URL = "https://www.googleapis.com/youtube/v3/";
 export const WATCH_URL = "https://www.youtube.com/watch?v=";
-export * as Types from "./types";
+export * as types from "./types";
 
 import { Fetch, FetchData, Params, RequestParams } from "../fetch";
 
